@@ -42,9 +42,17 @@ const server = http.createServer((req, res) => {
     }
 });
 
+var env = process.env.NODE_ENV || 'development';
 
-
-server.listen(port, hostname, () => {
-    console.log(`server running at http://${hostname}:${port}`);
-
-})
+switch (env) {
+    case 'development':
+        // Setup development config
+        server.listen(port, hostname, () => {
+            console.log(`server running at http://${hostname}:${port}`);
+        })
+        break;
+    default:
+        app.listen(PORT, () => console.log(`Server is listening on port ${PORT}...`));
+        // Setup production config
+        break;
+}
