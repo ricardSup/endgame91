@@ -1,5 +1,5 @@
 require('dotenv').config()
-const https = require('https')
+const http = require('http')
 const url = require('url')
 const mongoose = require('mongoose')
 
@@ -8,7 +8,7 @@ const hostname = 'localhost';
 const PORT = process.env.PORT || 3000;
 
 // mongoose.connect('mongodb://localhost:27017/test', {useNewUrlParser: true, useUnifiedTopology: true});
-mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://endgame9:endgame9@cluster0.ztxf1.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/test');
 
 const db = mongoose.connection;
 
@@ -22,7 +22,7 @@ const AddNewUser = async (req) => {
     await user.save()
 }
 
-const server = https.createServer((req, res) => {
+const server = http.createServer((req, res) => {
 
     var service = require('./service.js');
     const reqUrl = url.parse(req.url, true);
@@ -48,7 +48,7 @@ switch (env) {
     case 'development':
         // Setup development config
         server.listen(PORT, hostname, () => {
-            console.log(`server running at https://${hostname}:${PORT}`);
+            console.log(`server running at http://${hostname}:${PORT}`);
         })
         break;
     default:
