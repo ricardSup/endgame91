@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 
 const hostname = 'localhost';
 
-const port = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
 // mongoose.connect('mongodb://localhost:27017/test', {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/test');
@@ -47,8 +47,8 @@ var env = process.env.NODE_ENV || 'development';
 switch (env) {
     case 'development':
         // Setup development config
-        server.listen(port, hostname, () => {
-            console.log(`server running at http://${hostname}:${port}`);
+        server.listen(PORT, hostname, () => {
+            console.log(`server running at http://${hostname}:${PORT}`);
         })
         break;
     default:
