@@ -26,6 +26,12 @@ exports.getAllUser = async (req,res) => {
     res.end(JSON.stringify(listUser));
 }
 
+exports.invalidRequest = function (req, res) {
+    res.statusCode = 404;
+    res.setHeader('Content-Type', 'text/plain');
+    res.end('Invalid Request');
+};
+
 exports.addNewUser = function(req,res){
     body = '';
     req.on('data', function(chunk){

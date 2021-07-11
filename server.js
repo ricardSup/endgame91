@@ -1,5 +1,5 @@
 require('dotenv').config()
-const http = require('http')
+const https = require('https')
 const url = require('url')
 const mongoose = require('mongoose')
 
@@ -22,7 +22,7 @@ const AddNewUser = async (req) => {
     await user.save()
 }
 
-const server = http.createServer((req, res) => {
+const server = https.createServer((req, res) => {
 
     var service = require('./service.js');
     const reqUrl = url.parse(req.url, true);
@@ -48,7 +48,7 @@ switch (env) {
     case 'development':
         // Setup development config
         server.listen(PORT, hostname, () => {
-            console.log(`server running at http://${hostname}:${PORT}`);
+            console.log(`server running at https://${hostname}:${PORT}`);
         })
         break;
     default:
