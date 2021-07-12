@@ -4,9 +4,11 @@
  * Module dependencies.
  */
 
+ require('dotenv').config()
 var app = require('../app');
 var debug = require('debug')('gwordapi:server');
 var http = require('http');
+var mongoose = require('mongoose')
 
 /**
  * Get port from environment and store in Express.
@@ -14,6 +16,18 @@ var http = require('http');
 
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
+
+/**
+ * Connect to mongoDb server
+ */
+ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/test');
+
+ const db = mongoose.connection;
+ 
+ db.on('error', console.error.bind(console, 'connection error'));
+ db.once('open', function(){
+     console.log('success connect db');
+ });
 
 /**
  * Create HTTP server.
